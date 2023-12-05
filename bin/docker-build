@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+export IMAGE_NAME=hjfcoding/rails_demo
+$(aws ecr get-login --no-include-email --region ap-southeast-2)
+docker build -t rails_demo . ; RESULT=$?
+if [ $RESULT -eq 0 ]; then
+  docker tag rails_demo:latest $IMAGE_NAME:$BITBUCKET_BRANCH
+  docker push $IMAGE_NAME:$BITBUCKET_BRANCH
+  docker tag rails_demo:latest $IMAGE_NAME:$BITBUCKET_BRANCH-$BITBUCKET_BUILD_NUMBER
+  docker push $IMAGE_NAME:$BITBUCKET_BRANCH-$BITBUCKET_BUILD_NUMBER
+else
+  echo failed
+  exit $RESULT
+fi
