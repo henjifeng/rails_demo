@@ -33,9 +33,3 @@ NHzfhZPRVs1s3wYuLGxbbbaYbMiqMgiQ9GcaHci/r/jdUGfe1NpZh8NgSZBeUupbT80Qlix5nGGaWcdP
 
 
 
-docker run -it -d -p 3000:3000 -e .env  hjfcoding/rails_demo
-
-docker run -it -p 3000:3000 -e .env  hjfcoding/rails_demo sh
-
-
-docker run -it -d -p 3000:3000 -e RAILS_MASTER_KEY="cf0a459af6606c58e3ccd3c6fe2f4d8e" --name hjfcoding  hjfcoding/rails_demo
