@@ -33,3 +33,26 @@ NHzfhZPRVs1s3wYuLGxbbbaYbMiqMgiQ9GcaHci/r/jdUGfe1NpZh8NgSZBeUupbT80Qlix5nGGaWcdP
 
 
 
+events {
+    worker_connections 1024;
+}
+
+http {
+    upstream my-rails-app {
+        server my-rails-app:3000; # 这里的 my-rails-app 应与 Rails 服务名称相匹配
+    }
+
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            proxy_pass http://my-rails-app;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+}
+
